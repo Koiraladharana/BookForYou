@@ -15,14 +15,12 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|string|max:10|unique:user,phone',
+            'phone' => 'required|string|max:10|unique:users,phone',
             'address' => 'required|string|max:255',
             'college' => 'required|string|max:255',
             'faculty' => 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
-
-        @dd($validator);
 
         // If there is an error, send the user back
         if ($validator->fails()) {
@@ -35,7 +33,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
-            'college' => $request->collage,
+            'college' => $request->college,
             'faculty' => $request->faculty,
             'password' => Hash::make($request->password), // This locks the password 🔒
             'role' => 'user',

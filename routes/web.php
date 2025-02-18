@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/donation', function () {
     return view('homepage.donation');
@@ -44,5 +47,38 @@ Route::get('/register', function () {
 })->name('reguser');
 
 Route::post('register', [RegisterController::class, 'register']);
+
+// Logout Route
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
+
+//Admin panel
+Route::middleware(['auth', 'admin'])->group(function () {
+Route::get('/admin', [AdminController::class, 'index'])->name('admindas');
+});
+
+//User panel
+Route::middleware(['auth', 'user'])->group(function () {
+    Route::get('/user', [UserController::class, 'index'])->name('userdas');
+
+    Route::get('/donate', function () {
+        return view('user_homepage.donate');
+    });
+    Route::get('/sell', function () {
+        return view('user_homepage.sell');
+    });
+    Route::get('/swap', function () {
+        return view('user_homepage.swap');
+    });
+    
+  
+});
+
+
+
 
 

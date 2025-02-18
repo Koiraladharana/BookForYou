@@ -1,5 +1,3 @@
-<div class="main">
-	<h1>Welcome to home page</h1>
-</div>
+<script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>

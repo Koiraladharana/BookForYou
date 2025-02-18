@@ -20,3 +20,27 @@
 			</ul>
 		</div>
 	</nav>
+	<div class="main">
+		<div class="carousel">
+			<div class="carousel-track">
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide1.jpeg') }}" alt="carousel pic">
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide2.jpeg') }}" alt="carousel pic">
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide3.jpeg') }}" alt="carousel pic">
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide4.jpeg') }}" alt="carousel pic">
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide6.png') }}" alt="carousel pic">
+				</div>
+			</div>
+		</div>
+		<h1>Welcome to BookForYou</h1>
+	</div>
+	
+	

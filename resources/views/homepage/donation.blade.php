@@ -45,6 +45,10 @@
         .search-bar button {
             background-color: rgb(54, 154, 221); color: white; border: none; padding: 8px 15px; font-size: 16px; font-weight: bold; border-radius: 0 5px 5px 0; cursor: pointer;
         }
+		.main {
+    height: 100vh;
+    padding: 20px;
+}
         .dropdown {
 			position: relative;
 			display: inline-block;
@@ -73,6 +77,60 @@
 			display: block;
 			padding: 8px 12px;
 		}
+		/* Carousel Container */
+.carousel {
+    width: 100%;
+    height: 400px;
+    padding: 0px; /* Adjust padding if necessary */
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to bottom, #6a1b9a, #d500f9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding and border are included in height/width */
+}
+
+/* Carousel Track */
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Carousel Items */
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+   /* Ensures images fit properly */
+    border-radius: 10px;
+}
+
+/* Optional: Add Dots for Navigation */
+.carousel-dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carousel-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 5px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carousel-dots span.active {
+    background-color: #d500f9;
+}
 	</style>
 </head>
 <body>
@@ -92,6 +150,19 @@
 				</li>
 		</div>
 	</nav>
+	<div class="main">
+	<div class="carousel">
+		<div class="carousel-track">
+			<div class="carousel-item">
+				<img src="{{ asset('images/slide1.jpeg') }}" alt="carousel pic">
+			</div>
+			<div class="carousel-item">
+				<img src="{{ asset('images/slide2.jpeg') }}" alt="carousel pic">
+			</div>
+		</div>
+	</div>
+	</div>
+	<script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>
 <h1>this is Donation</h1>
