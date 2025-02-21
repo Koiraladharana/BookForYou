@@ -105,13 +105,13 @@
 
     <!-- Top Navigation -->
     <div class="navbar">
-        <h2><a href="{{ route('userdas') }}">User Dashboard</a></h2>
+        <h2><a href="<?php echo e(route('userdas')); ?>">User Dashboard</a></h2>
         <div>
-            <a href="{{ route('userdonate') }}">Donation</a>
-            <a href="{{ route('usersell') }}">Selling</a>
-            <a href="{{ route('userswap') }}">Exchange</a>
-            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                @csrf
+            <a href="<?php echo e(route('userdonate')); ?>">Donation</a>
+            <a href="<?php echo e(route('usersell')); ?>">Selling</a>
+            <a href="<?php echo e(route('userswap')); ?>">Exchange</a>
+            <form action="<?php echo e(route('logout')); ?>" method="POST" style="display:inline;">
+                <?php echo csrf_field(); ?>
                 <button type="submit" class="logout-btn">Logout</button>
             </form>
         </div>
@@ -121,19 +121,19 @@
     <div class="sidebar">
         <div class="user-info">
             <h3>👤</h3>
-            <span>{{ Auth::user()->name }}</span>
+            <span><?php echo e(Auth::user()->name); ?></span>
         </div>
-        <a href="{{ route('books.view') }}">📖 View My Books</a>
-        <a href="{{ route('books.create') }}">➕ Add New Book</a>
+        <a href="<?php echo e(route('books.view')); ?>">📖 View My Books</a>
+        <a href="<?php echo e(route('books.create')); ?>">➕ Add New Book</a>
         
-        <a href="{{ route('books.showedit') }}">📖 Edit Book</a>
+        <a href="<?php echo e(route('books.showedit')); ?>">📖 Edit Book</a>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
         <h2>Welcome to Your User Panel</h2>
         <p>Manage your books and browse books from other users.</p>
-        <h3> <span>{{ Auth::user()->name }}</span> Welcome</h3>
+        <h3> <span><?php echo e(Auth::user()->name); ?></span> Welcome</h3>
     </div>
 
     <!-- Bootstrap JS -->
@@ -142,3 +142,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/user_homepage/user.blade.php ENDPATH**/ ?>

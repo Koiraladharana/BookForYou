@@ -210,30 +210,30 @@
 		<div class="carousel">
 			<div class="carousel-track">
 				<div class="carousel-item">
-					<img src="{{ asset('images/slide1.jpeg') }}" alt="carousel pic">
+					<img src="<?php echo e(asset('images/slide1.jpeg')); ?>" alt="carousel pic">
 				</div>
 				<div class="carousel-item">
-					<img src="{{ asset('images/slide3.jpeg') }}" alt="carousel pic">
+					<img src="<?php echo e(asset('images/slide3.jpeg')); ?>" alt="carousel pic">
 				</div>
 			</div>
 		</div>
 
 		<div class="book-container">
-			@foreach($books as $book)
+			<?php $__currentLoopData = $books; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="book-card">
-				<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
-				<p><strong>Book name:</strong> {{ $book->name }}</p>
-				<p><strong>Author:</strong> {{ $book->author ?? 'Unknown' }}</p>
-				<p><strong>Category:</strong> {{ $book->category }}</p>
-				<p><strong>Location:</strong> {{ $book->location }}</p>
-				<p><strong>Price:</strong> ${{ $book->price }}</p>
-				<p><strong>Status:</strong> {{ $book->status }}</p>
+				<img src="<?php echo e(asset('storage/' . $book->photo)); ?>" alt="Book Image">
+				<p><strong>Book name:</strong> <?php echo e($book->name); ?></p>
+				<p><strong>Author:</strong> <?php echo e($book->author ?? 'Unknown'); ?></p>
+				<p><strong>Category:</strong> <?php echo e($book->category); ?></p>
+				<p><strong>Location:</strong> <?php echo e($book->location); ?></p>
+				<p><strong>Price:</strong> $<?php echo e($book->price); ?></p>
+				<p><strong>Status:</strong> <?php echo e($book->status); ?></p>
 			</div>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</div>
 		</div>
 
 
-		<script src="{{ asset('js/index.js') }}"></script>
+		<script src="<?php echo e(asset('js/index.js')); ?>"></script>
 </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/homepage/selling.blade.php ENDPATH**/ ?>

@@ -31,7 +31,24 @@
 				</div>
 			</div>
 		</div>
-		<h1>this is Donation</h1>
+
+<div class="book-container">
+	@foreach($books as $book)
+	<div class="book-card">
+		<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
+		<p><strong>Book name:</strong> {{ $book->name }}</p>
+		<p><strong>Author:</strong> {{ $book->author ?? 'Unknown' }}</p>
+		<p><strong>Category:</strong> {{ $book->category }}</p>
+		<p><strong>Location:</strong> {{ $book->location }}</p>
+		<p><strong>Price:</strong> ${{ $book->price }}</p>
+		<p><strong>Status:</strong> {{ $book->status }}</p>
+		<p><strong>Email:</strong> {{ $book->email }}</p>
+		@if($book->phone)
+        <p><strong>Phone:</strong> {{ $book->phone }}</p>
+    @endif
+	</div>
+	@endforeach
+</div>
 		</div>
 		<script src="{{ asset('js/index.js') }}"></script>
 		

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Second Hand Selling</title>
+	<title>Donation</title>
 	<style type="text/css">
 	    body, html {
 			margin: 0;
@@ -15,10 +15,6 @@
 		*{
 			text-decoration: none;
 		}
-		.main {
-            height: 100vh;
-            padding: 20px;
-        }
 		.navbar{
 			position: fixed; top: 0; width: 98%; z-index: 1000; background: #32353c; font-family: calibri; padding-right: 15px;padding-left: 15px;margin-top: 0px;
 		}
@@ -49,6 +45,10 @@
         .search-bar button {
             background-color: rgb(54, 154, 221); color: white; border: none; padding: 8px 15px; font-size: 16px; font-weight: bold; border-radius: 0 5px 5px 0; cursor: pointer;
         }
+		.main {
+    height: 100vh;
+    padding: 20px;
+}
         .dropdown {
 			position: relative;
 			display: inline-block;
@@ -72,12 +72,10 @@
 		.dropdown-content a:hover {
 			background-color: rgba(37, 37, 231, 0.911);
 			color: white;
-
 		}
 		.dropdown:hover .dropdown-content {
 			display: block;
 			padding: 8px 12px;
-
 		}
 		/* Carousel Container */
 .carousel {
@@ -132,6 +130,31 @@
 
 .carousel-dots span.active {
     background-color: #d500f9;
+}
+.login-message {
+    display: none; /* Hide the message by default */
+    position: absolute;
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 5px;
+    width: max-content;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Show the login message when hovering over the phone number */
+.phone:hover .login-message {
+    display: block;
+}
+
+/* Styling for the login link */
+.login-link {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
 }
 /* Book Cards Layout */
 .book-container {
@@ -194,7 +217,7 @@
 			<div class="logo"><a href="/">BookForYou</a> </div>
 			<ul>
 				<li><a href="/">Home</a></li>
-				<li><a href="/donation">Donation</a></li>
+				<li><a href="/selling">Selling</a></li>
                 <li><a href="/exchange">Exchange</a></li>
 				<li class="dropdown">
 					<button>Account</button>
@@ -203,37 +226,35 @@
 						<a href="/register">Register</a>
 					</div>
 				</li>
-			</ul>
 		</div>
 	</nav>
 	<div class="main">
-		<div class="carousel">
-			<div class="carousel-track">
-				<div class="carousel-item">
-					<img src="{{ asset('images/slide1.jpeg') }}" alt="carousel pic">
-				</div>
-				<div class="carousel-item">
-					<img src="{{ asset('images/slide3.jpeg') }}" alt="carousel pic">
-				</div>
+	<div class="carousel">
+		<div class="carousel-track">
+			<div class="carousel-item">
+				<img src="<?php echo e(asset('images/slide1.jpeg')); ?>" alt="carousel pic">
+			</div>
+			<div class="carousel-item">
+				<img src="<?php echo e(asset('images/slide2.jpeg')); ?>" alt="carousel pic">
 			</div>
 		</div>
-
-		<div class="book-container">
-			@foreach($books as $book)
-			<div class="book-card">
-				<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
-				<p><strong>Book name:</strong> {{ $book->name }}</p>
-				<p><strong>Author:</strong> {{ $book->author ?? 'Unknown' }}</p>
-				<p><strong>Category:</strong> {{ $book->category }}</p>
-				<p><strong>Location:</strong> {{ $book->location }}</p>
-				<p><strong>Price:</strong> ${{ $book->price }}</p>
-				<p><strong>Status:</strong> {{ $book->status }}</p>
-			</div>
-			@endforeach
+	</div>
+	<div class="book-container">
+		<?php $__currentLoopData = $books; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+		<div class="book-card">
+			<img src="<?php echo e(asset('storage/' . $book->photo)); ?>" alt="Book Image">
+			<h3><?php echo e($book->book_name); ?></h3>
+			<p><strong>Author:</strong> <?php echo e($book->author ?? 'Unknown'); ?></p>
+			<p><strong>Category:</strong> <?php echo e($book->category); ?></p>
+			<p><strong>Location:</strong> <?php echo e($book->location); ?></p>
+			<p><strong>Price:</strong> $<?php echo e($book->price); ?></p>
+			<p><strong>Status:</strong> <?php echo e($book->status); ?></p>
 		</div>
-		</div>
+		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	</div>
 
-
-		<script src="{{ asset('js/index.js') }}"></script>
+	    </div>
+	<script src="<?php echo e(asset('js/index.js')); ?>"></script>
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/homepage/donation.blade.php ENDPATH**/ ?>

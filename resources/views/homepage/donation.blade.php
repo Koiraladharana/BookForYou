@@ -131,6 +131,84 @@
 .carousel-dots span.active {
     background-color: #d500f9;
 }
+.login-message {
+    display: none; /* Hide the message by default */
+    position: absolute;
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 5px;
+    width: max-content;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Show the login message when hovering over the phone number */
+.phone:hover .login-message {
+    display: block;
+}
+
+/* Styling for the login link */
+.login-link {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+/* Book Cards Layout */
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the cards */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Book Card */
+.book-card {
+    width: 250px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-card:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Book Image */
+.book-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Book Text */
+.book-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #32353c;
+}
+
+.book-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .book-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 	</style>
 </head>
 <body>
@@ -161,8 +239,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="book-container">
+		@foreach($books as $book)
+		<div class="book-card">
+			<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
+			<h3>{{ $book->book_name }}</h3>
+			<p><strong>Author:</strong> {{ $book->author ?? 'Unknown' }}</p>
+			<p><strong>Category:</strong> {{ $book->category }}</p>
+			<p><strong>Location:</strong> {{ $book->location }}</p>
+			<p><strong>Price:</strong> ${{ $book->price }}</p>
+			<p><strong>Status:</strong> {{ $book->status }}</p>
+		</div>
+		@endforeach
 	</div>
+
+	    </div>
 	<script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>
-<h1>this is Donation</h1>
