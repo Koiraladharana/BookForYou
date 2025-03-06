@@ -103,6 +103,7 @@
         <!-- Login Form -->
         <form action="<?php echo e(route('login')); ?>" method="POST">
             <?php echo csrf_field(); ?>
+            <input type="hidden" name="redirect" value="<?php echo e(request('redirect')); ?>">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" class="form-control <?php $__errorArgs = ['email'];

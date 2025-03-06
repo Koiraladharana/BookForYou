@@ -151,6 +151,104 @@
         align-items: center;
     }
 }
+/* index.css */
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.stat-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 20%;
+    background-color: snow !important;
+    border-radius: 8px;
+}
+
+.stat-box h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.stat-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007BFF;
+}
+/* Add to your CSS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #88d113 !important;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: darkred;
+}
+.status-box.available {
+    background-color: #4CAF50; /* Green color */
+}
+
+.status-box.not-available {
+    background-color: #f44336; /* Red color */
+}
+
+/* Table Cell Styling */
+table td {
+    text-align: center; /* Center the content in table cells */
+    vertical-align: middle; /* Align content vertically in the middle */
+}
+.status-box {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 14px; /* Adjust font size as needed */
+    text-align: center; /* Center the text */
+}
+th {
+    text-align: center; 
+}
+/* Profile Image */
+img {
+            width: 150px;
+            height: 100px;
+            border-radius: 0%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
 
     </style>
 </head>
@@ -159,11 +257,9 @@
 
     <!-- Top Navigation -->
     <div class="navbar">
-        <h2><a href="/">User Dashboard</a></h2>
+        <h2><a href="/admin">Admin Panel</a></h2>
         <div>
-            <a href="<?php echo e(route('books.donation')); ?>">Donation</a>
-            <a href="<?php echo e(route('books.selling')); ?>">Selling</a>
-            <a href="<?php echo e(route('books.exchange')); ?>">Exchange</a>
+            <a href="<?php echo e(route('home')); ?>">Home</a>
             <form action="<?php echo e(route('logout')); ?>" method="POST" style="display:inline;">
                 <?php echo csrf_field(); ?>
                 <button type="submit" class="logout-btn">Logout</button>
@@ -177,11 +273,10 @@
             <h3>👤</h3>
             <span><?php echo e(Auth::user()->name); ?></span>
         </div>
-        
-         <a href="<?php echo e(route('userdas')); ?>">📖 View Book</a>
-        <a href="<?php echo e(route('books.create')); ?>">➕ Add New Book</a>
-        <a href="<?php echo e(route('books.showedit')); ?>">📖 Edit Book</a>
-        <a href="<?php echo e(url('/report-fraud')); ?>">🚨 Report Fraud</a>
+        <a href="<?php echo e(route('admindas')); ?>">🏠Home</a>
+         <a href="<?php echo e(route('showBooks')); ?>">📚Show Books</a>
+        <a href="<?php echo e(route('showUsers')); ?>">👤Show Users</a>
+        <a href="<?php echo e(route('showFraudReports')); ?>">⚠️ Show User Reports</a>
 
         
     </div>
@@ -197,4 +292,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/admin_homepage/admin_layout.blade.php ENDPATH**/ ?>

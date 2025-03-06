@@ -117,7 +117,7 @@
             <!-- Phone -->
             <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" value="{{ old('phone') }}" class="{{ $errors->has('phone') ? 'error' : '' }}" id="phone" placeholder="Enter your phone number" name="phone">
+                <input type="number" value="{{ old('phone') }}" class="{{ $errors->has('phone') ? 'error' : '' }}" id="phone" placeholder="Enter your phone number"  name="phone" oninput="validatePhone(this)">
                 <span class="text-danger">
                     @error('phone')
                         {{ $message }}
@@ -192,5 +192,13 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function validatePhone(input) {
+            // Remove non-numeric characters and limit to 10 digits
+            input.value = input.value.replace(/\D/g, '').slice(0, 10);
+        }
+    </script>
+    
 </body>
 </html>

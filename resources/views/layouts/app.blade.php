@@ -159,11 +159,11 @@
 
     <!-- Top Navigation -->
     <div class="navbar">
-        <h2><a href="{{ route('userdas') }}">User Dashboard</a></h2>
+        <h2><a href="/">User Dashboard</a></h2>
         <div>
-            <a href="{{ route('userdonate') }}">Donation</a>
-            <a href="{{ route('usersell') }}">Selling</a>
-            <a href="{{ route('userswap') }}">Exchange</a>
+            <a href="{{ route('books.donation') }}">Donation</a>
+            <a href="{{ route('books.selling') }}">Selling</a>
+            <a href="{{ route('books.exchange') }}">Exchange</a>
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
                 <button type="submit" class="logout-btn">Logout</button>
@@ -178,9 +178,11 @@
             <span>{{ Auth::user()->name }}</span>
         </div>
         
-         <a href="{{ route('books.view') }}">📖 View Book</a>
+         <a href="{{ route('userdas') }}">📖 View Book</a>
         <a href="{{ route('books.create') }}">➕ Add New Book</a>
         <a href="{{ route('books.showedit') }}">📖 Edit Book</a>
+        <a href="{{ url('/report-fraud') }}">🚨 Report Fraud</a>
+
         
     </div>
 

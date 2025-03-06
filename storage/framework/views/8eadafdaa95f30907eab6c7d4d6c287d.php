@@ -15,8 +15,22 @@
 				<li><a href="/donation">Donation</a></li>
 				<li><a href="/selling">Selling</a></li>
                 <li><a href="/exchange">Exchange</a></li>
-				<button><a href="/login">login</a></button>
-				<button><a href="/register">Register</a></button>
+				
+				<?php if(auth()->guard()->check()): ?>
+    <li class="dropdown">
+        <a href="/user" class="dropbtn">👤<?php echo e(Auth::user()->name); ?></a>
+        <div class="dropdown-content">
+            <form action="<?php echo e(route('logout')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </li>
+<?php else: ?>
+    <button><a href="<?php echo e(route('login')); ?>">Login</a></button>
+    <button><a href="<?php echo e(route('reguser')); ?>">Register</a></button>
+<?php endif; ?>
+
 			</ul>
 		</div>
 	</nav>
@@ -40,20 +54,34 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="book-container">
 			<?php $__currentLoopData = $books; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-			<div class="book-card">
-				<img src="<?php echo e(asset('storage/' . $book->photo)); ?>" alt="Book Image">
-				<p><strong>Book name:</strong> <?php echo e($book->name); ?></p>
-				<p><strong>Author:</strong> <?php echo e($book->author ?? 'Unknown'); ?></p>
-				<p><strong>Category:</strong> <?php echo e($book->category); ?></p>
-				<p><strong>Location:</strong> <?php echo e($book->location); ?></p>
-				<p><strong>Price:</strong> $<?php echo e($book->price); ?></p>
-				<p><strong>Status:</strong> <?php echo e($book->status); ?></p>
-			</div>
-			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+		<div class="book-card">
+			<a href="<?php echo e(Auth::check() ? route('usersee', $book->id) : route('login', ['redirect' => route('usersee', $book->id)])); ?>">
+			<img src="<?php echo e(asset('storage/' . $book->photo)); ?>" alt="Book Image">
+			<p><strong>User ID:</strong> <?php echo e($book->user_id); ?></p>
+			<h3><?php echo e($book->book_name); ?></h3>
+			<p><strong>Book name:</strong> <?php echo e($book->name); ?></p>
+			<?php if(strtolower($book->category) === 'exchange'): ?>
+            <p><strong>Book I Want:</strong> <?php echo e($book->want_book ?? 'Not specified'); ?></p>
+			
+                 <?php endif; ?>
+			<!-- Always Green "Available" Status -->
+			<p><strong>Status:</strong> 
+				<span class="status-box">Available</span>
+			</p>
+			
+			<?php if(auth()->guard()->guest()): ?>
+			<div class="hover-message">Login to see more details</div>
+			    <?php endif; ?>
+			</a>
 		</div>
-		
+		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+		</div>
+
 	</div>
+		
+		
 	
 	<?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/homepage/header.blade.php ENDPATH**/ ?>

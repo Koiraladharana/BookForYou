@@ -11,6 +11,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
+                    
                     <p><strong>User ID:</strong> <?php echo e($book->user_id); ?></p>
                     <p><strong>Book name:</strong> <?php echo e($book->name); ?></p>
                     
@@ -50,4 +51,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/user_homepage/show_books.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/user_homepage/user_showbook.blade.php ENDPATH**/ ?>

@@ -16,13 +16,13 @@
                         </a>
                         <div class="card-body">
                             <h5 class="card-title"><?php echo e($book->name); ?></h5>
-                            <p class="card-text">
-                                <strong>Status:</strong>
-                                <span class="badge <?php echo e($book->status == 'available' ? 'bg-success' : 'bg-danger'); ?>">
-                                    <?php echo e(ucfirst($book->status)); ?>
+                            <p><strong>Status:</strong> 
+                                <span class="badge <?php echo e($book->status == 'Available' ? 'bg-success' : 'bg-danger'); ?> p-2 rounded">
+                                    <?php echo e($book->status); ?>
 
                                 </span>
                             </p>
+                            
                         </div>
                     </div>
                 </div>

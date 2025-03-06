@@ -19,45 +19,20 @@ class BookController extends Controller
 
     public function showDonations()
     {
-        $books = Book::where('category', 'donation')->get();
+        $books = Book::where('category', 'donation')->where('status', 'Available')->get();
         return view('homepage.donation', compact('books'));
     }
 
     public function showSelling()
     {
-        $books = Book::where('category', 'selling')->get();
+        $books = Book::where('category', 'selling')->where('status', 'Available')->get();
         return view('homepage.selling', compact('books'));
     }
 
     public function showExchange()
     {
-        $books = Book::where('category', 'exchange')->get();
+        $books = Book::where('category', 'exchange')->where('status', 'Available')->get();
         return view('homepage.exchange', compact('books'));
-    }
-
-    // Show books after login (full details)
-    public function user_index(Book $books)
-    {
-        $books = Book::where('status', 'Available')->get();
-        return view('user_homepage.user', compact('books'));
-    }
-
-    public function userDonations()
-    {
-        $books = Book::where('category', 'donation')->get();
-        return view('user_homepage.donate', compact('books'));
-    }
-
-    public function userSelling()
-    {
-        $books = Book::where('category', 'selling')->get();
-        return view('user_homepage.sell', compact('books'));
-    }
-
-    public function userExchange()
-    {
-        $books = Book::where('category', 'exchange')->get();
-        return view('user_homepage.swap', compact('books'));
     }
 
     // Show form to add a book
@@ -73,10 +48,18 @@ class BookController extends Controller
         return view('user_homepage.view_books', compact('books'));
     }
 
-    public function show(Book $book)
-    {
-        return view('user_homepage.show_books', compact('book'));
+    public function userSee(Book $book){
+        $books = Book::where('user_id', Auth::id())->get();
+        return view('user_homepage.user_showbook', compact('book'));
     }
+
+    public function show(Book $book)
+{
+    $this->authorize('show', $book);
+    
+    return view('user_homepage.show_books', compact('book'));
+}
+
 
     // Store a new book in the database
     public function store(Request $request)
@@ -90,7 +73,10 @@ class BookController extends Controller
             'want_book' => 'nullable|string',
             'email' => 'required|email',
             'phone' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg'
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg',
+            'isbn' => 'required',
+            'publication' => 'required'
+
         ]);
 
         try {
@@ -113,6 +99,8 @@ class BookController extends Controller
                 'have_book' => $request->have_book ?? null,
                 'want_book' => $request->want_book ?? null,
                 'status' => 'Available',
+                'isbn' => $request->isbn,
+                'publication' => $request->publication,
                 'user_id' => Auth::id()
             ]);
 
@@ -126,6 +114,7 @@ class BookController extends Controller
     // Show edit form
     public function edit(Book $book)
     {
+        $this->authorize('edit', $book);
         return view('user_homepage.edit_form', compact('book'));
     }
 
@@ -137,37 +126,44 @@ class BookController extends Controller
     }
 
     public function update(Request $request, Book $book)
-    {
-        if ($book->user_id != Auth::id()) {
-            return redirect()->route('userdas')->with('error', 'Unauthorized!');
+{
+    if ($book->user_id != Auth::id()) {
+        return redirect()->route('userdas')->with('error', 'Unauthorized!');
+    }
+
+    $request->validate([
+        'name' => 'required',
+        'category' => 'required|in:donation,selling,exchange',
+        'location' => 'required',
+        'price' => 'nullable|numeric',
+        'phone' => 'nullable|digits:10',
+        'email' => 'required|email',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+    ]);
+
+    $data = $request->only(['name', 'category', 'location', 'price', 'phone', 'email']);
+
+    if ($request->hasFile('photo')) {
+        // Delete old image if it exists
+        if ($book->photo && $book->photo !== 'default.png') {
+            Storage::disk('public')->delete($book->photo);
         }
 
-        $request->validate([
-            'name' => 'required',
-            'category' => 'required|in:donation,selling,exchange',
-            'location' => 'required',
-            'price' => 'nullable|numeric',
-            'phone' => 'nullable|digits:10',
-            'email' => 'required|email',
-        ]);
-
-        $book->update([
-            'name' => $request->name,
-            'category' => $request->category,
-            'location' => $request->location,
-            'price' => ($request->category === 'donation' || $request->category === 'exchange') ? 0 : $request->price,
-            'phone' => $request->phone,
-            'email' => $request->email
-        ]);
-
-        return redirect()->route('userdas')->with('success', 'Book updated successfully!');
+        // Store new image
+        $data['photo'] = $request->file('photo')->store('book_photos', 'public');
     }
+
+    $book->update($data);
+
+    return redirect()->route('books.showedit')->with('success', 'Book updated successfully!');
+}
+
 
     // Delete a book
     public function destroy(Book $book)
     {
         if ($book->user_id != Auth::id()) {
-            return redirect()->route('userdas')->with('error', 'Unauthorized!');
+            return redirect()->route('books.showedit')->with('error', 'Unauthorized!');
         }
 
         if ($book->photo && $book->photo !== 'default.png') {
@@ -175,19 +171,19 @@ class BookController extends Controller
         }
 
         $book->delete();
-        return redirect()->route('userdas')->with('success', 'Book deleted successfully!');
+        return redirect()->route('books.showedit')->with('success', 'Book deleted successfully!');
     }
 
     // Toggle book availability
     public function toggleStatus(Book $book)
     {
         if ($book->user_id != Auth::id()) {
-            return redirect()->route('userdas')->with('error', 'Unauthorized!');
+            return redirect()->route('books.showedit')->with('error', 'Unauthorized!');
         }
 
         $book->status = $book->status === 'Available' ? 'Not Available' : 'Available';
         $book->save();
 
-        return redirect()->route('userdas')->with('success', 'Book status updated!');
+        return redirect()->route('books.showedit')->with('success', 'Book status updated!');
     }
 }

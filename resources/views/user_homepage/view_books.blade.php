@@ -16,12 +16,12 @@
                         </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ $book->name }}</h5>
-                            <p class="card-text">
-                                <strong>Status:</strong>
-                                <span class="badge {{ $book->status == 'available' ? 'bg-success' : 'bg-danger' }}">
-                                    {{ ucfirst($book->status) }}
+                            <p><strong>Status:</strong> 
+                                <span class="badge {{ $book->status == 'Available' ? 'bg-success' : 'bg-danger' }} p-2 rounded">
+                                    {{ $book->status }}
                                 </span>
                             </p>
+                            
                         </div>
                     </div>
                 </div>

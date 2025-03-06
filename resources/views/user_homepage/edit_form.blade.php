@@ -35,6 +35,19 @@
             <input type="text" name="author" class="form-control" value="{{ old('author', $book->author) }}">
         </div>
 
+        <!-- Book Image Upload -->
+        <div class="mb-3">
+            <label for="photo" class="form-label">Book Image</label>
+            <input type="file" name="photo" class="form-control" accept="image/*" onchange="previewImage(event)">
+
+            @if($book->photo)
+                <div class="mt-2">
+                    <p>Current Image:</p>
+                    <img id="preview" src="{{ asset('storage/' . $book->photo) }}" alt="Book Image" width="150">
+                </div>
+            @endif
+        </div>
+
         <div class="mb-3">
             <label for="location" class="form-label">Location</label>
             <input type="text" name="location" class="form-control" value="{{ old('location', $book->location) }}" required>
@@ -83,6 +96,12 @@
         } else {
             priceField.removeAttribute('readonly');
         }
+    }
+
+    function previewImage(event) {
+        var preview = document.getElementById('preview');
+        preview.src = URL.createObjectURL(event.target.files[0]);
+        preview.style.display = 'block';
     }
 </script>
 @endsection

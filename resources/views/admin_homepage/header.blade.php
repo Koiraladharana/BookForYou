@@ -1,25 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>AdminPanel</title>
-	
-	<link rel="stylesheet" href="{{asset('css/index.css') }}">
-</head>
-<body>
-	<nav class="navbar">
-		<div class="navdiv">
-			<div class="logo"><a href="/">AdminPanel</a> </div>
-			<ul>
-				<li><a href="/donation">Donation</a></li>
-				<li><a href="/selling">Selling</a></li>
-                <li><a href="/exchange">Exchange</a></li>
-				<form action="{{ route('logout') }}" method="POST" style="display:inline;">
-					@csrf
-					<button type="submit" class="btn btn-danger">Logout</button>
-				</form>
-			</ul>
-		</div>
-	</nav>
+@extends('admin_homepage.admin_layout')
+@section('content')
+    <div class="container">
+        <h1>Welcome to Admin Panel</h1>
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Total Books</h3>
+                <p>{{ $totalBooks }}</p>
+            </div>
+            <div class="stat-box">
+                <h3>Total Users</h3>
+                <p>{{ $totalUsers }}</p>
+            </div>
+            <div class="stat-box">
+                <h3>Total Admins</h3>
+                <p>{{ $totalAdmins }}</p>
+            </div>
+			<div class="stat-box">
+                <h3>Total Fraud Reports</h3>
+                <p>{{ $totalFrauds }}</p>
+            </div>
+        </div>
+    </div>
+@endsection
 	@include('admin_homepage.footer')

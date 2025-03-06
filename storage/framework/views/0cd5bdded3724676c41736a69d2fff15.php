@@ -30,6 +30,18 @@
             </select>
         </div>
 
+        <!-- ISBN Field -->
+        <div class="mb-3">
+            <label for="isbn" class="form-label">ISBN</label>
+            <input type="text" name="isbn" class="form-control">
+        </div>
+
+        <!-- Publication Field -->
+        <div class="mb-3">
+            <label for="publication" class="form-label">Publication</label>
+            <input type="text" name="publication" class="form-control">
+        </div>
+
         <div class="mb-3">
             <label for="photo" class="form-label">Book Photo</label>
             <input type="file" name="photo" class="form-control">

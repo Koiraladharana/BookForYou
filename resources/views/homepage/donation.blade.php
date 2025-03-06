@@ -4,256 +4,76 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Donation</title>
-	<style type="text/css">
-	    body, html {
-			margin: 0;
-			padding: 0;
-		}
-		body {
-			padding-top: 60px; /* Adjust based on the navbar height */
-		}
-		*{
-			text-decoration: none;
-		}
-		.navbar{
-			position: fixed; top: 0; width: 98%; z-index: 1000; background: #32353c; font-family: calibri; padding-right: 15px;padding-left: 15px;margin-top: 0px;
-		}
-		.navdiv{
-			display: flex; align-items: center; justify-content: space-between;
-		}
-		.logo a{
-			font-size: 35px; font-weight: 600; color: white;
-		}
-		li{
-			list-style: none; display: inline-block;
-		}
-		li a{
-			color: white; font-size: 18px; font-weight: bold; margin-right: 25px;
-		}
-		button{
-			background-color: #bdf1ed91; margin-left: 10px; border-radius: 10px; padding: 10px; width: 90px;
-		}
-		button a{
-			color: white; font-weight: bold; font-size: 15px;
-		}
-        .search-bar {
-            display: flex; align-items: center;
-        }
-        .search-bar input {
-            padding: 8px 10px; font-size: 16px; border: none; border-radius: 5px 0 0 5px; outline: none;
-        }
-        .search-bar button {
-            background-color: rgb(54, 154, 221); color: white; border: none; padding: 8px 15px; font-size: 16px; font-weight: bold; border-radius: 0 5px 5px 0; cursor: pointer;
-        }
-		.main {
-    height: 100vh;
-    padding: 20px;
-}
-        .dropdown {
-			position: relative;
-			display: inline-block;
-		}
-		.dropdown-content {
-			display: none;
-			position: absolute;
-			background-color: white;
-			min-width: 100px;
-			box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-			z-index: 1;
-			border-radius: 5px;
-		}
-		.dropdown-content a {
-			color: black;
-			padding: 8px 12px;
-			text-decoration: none;
-			display: block;
-			font-weight: normal;
-		}
-		.dropdown-content a:hover {
-			background-color: rgba(37, 37, 231, 0.911);
-			color: white;
-		}
-		.dropdown:hover .dropdown-content {
-			display: block;
-			padding: 8px 12px;
-		}
-		/* Carousel Container */
-.carousel {
-    width: 100%;
-    height: 400px;
-    padding: 0px; /* Adjust padding if necessary */
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(to bottom, #6a1b9a, #d500f9);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    box-sizing: border-box; /* Ensures padding and border are included in height/width */
-}
 
-/* Carousel Track */
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-/* Carousel Items */
-.carousel-item {
-    min-width: 100%;
-    height: 100%;
-}
-
-.carousel-item img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-   /* Ensures images fit properly */
-    border-radius: 10px;
-}
-
-/* Optional: Add Dots for Navigation */
-.carousel-dots {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.carousel-dots span {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 5px;
-    background-color: white;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.carousel-dots span.active {
-    background-color: #d500f9;
-}
-.login-message {
-    display: none; /* Hide the message by default */
-    position: absolute;
-    background-color: #f8d7da; /* Light red background */
-    color: #721c24; /* Dark red text */
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    margin-top: 5px;
-    width: max-content;
-    text-align: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Show the login message when hovering over the phone number */
-.phone:hover .login-message {
-    display: block;
-}
-
-/* Styling for the login link */
-.login-link {
-    color: red;
-    text-decoration: none;
-    font-weight: bold;
-}
-/* Book Cards Layout */
-.book-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the cards */
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Individual Book Card */
-.book-card {
-    width: 250px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-}
-
-.book-card:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-/* Book Image */
-.book-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-/* Book Text */
-.book-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #32353c;
-}
-
-.book-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 5px 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .book-container {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-	</style>
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 <body>
 	<nav class="navbar">
 		<div class="navdiv">
-			<div class="logo"><a href="/">BookForYou</a> </div>
+			<div class="logo"><a href="/">BookForYou</a></div>
 			<ul>
 				<li><a href="/">Home</a></li>
 				<li><a href="/selling">Selling</a></li>
                 <li><a href="/exchange">Exchange</a></li>
+
+				@auth
+				<li class="dropdown">
+					<a href="/user" class="dropbtn">👤{{ Auth::user()->name }}</a>
+					<div class="dropdown-content">
+						<form action="{{ route('logout') }}" method="POST">
+							@csrf
+							<button type="submit" class="logout-btn">Logout</button>
+						</form>
+					</div>
+				</li>
+				@else
 				<li class="dropdown">
 					<button>Account</button>
 					<div class="dropdown-content">
-						<a href="/login">Login</a>
-						<a href="/register">Register</a>
+						<a href="{{ route('login') }}">Login</a>
+						<a href="{{ route('reguser') }}">Register</a>
 					</div>
 				</li>
+				@endauth
+			</ul>
 		</div>
 	</nav>
+
 	<div class="main">
-	<div class="carousel">
-		<div class="carousel-track">
-			<div class="carousel-item">
-				<img src="{{ asset('images/slide1.jpeg') }}" alt="carousel pic">
-			</div>
-			<div class="carousel-item">
-				<img src="{{ asset('images/slide2.jpeg') }}" alt="carousel pic">
+		<div class="carousel">
+			<div class="carousel-track">
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide1.jpeg') }}" alt="carousel pic">
+				</div>
+				<div class="carousel-item">
+					<img src="{{ asset('images/slide2.jpeg') }}" alt="carousel pic">
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="book-container">
-		@foreach($books as $book)
-		<div class="book-card">
-			<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
-			<h3>{{ $book->book_name }}</h3>
-			<p><strong>Author:</strong> {{ $book->author ?? 'Unknown' }}</p>
-			<p><strong>Category:</strong> {{ $book->category }}</p>
-			<p><strong>Location:</strong> {{ $book->location }}</p>
-			<p><strong>Price:</strong> ${{ $book->price }}</p>
-			<p><strong>Status:</strong> {{ $book->status }}</p>
+
+		<div class="book-container">
+			@foreach($books as $book)
+			<div class="book-card">
+				<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
+				<a href="{{ Auth::check() ? route('usersee', $book->id) : route('login', ['redirect' => route('usersee', $book->id)]) }}">
+					<p><strong>User ID:</strong> {{ $book->user_id }}</p>
+					<h3>{{ $book->book_name }}</h3>
+					<p><strong>Book Name:</strong> {{ $book->name }}</p>
+					<p><strong>Category:</strong> {{ $book->category }}</p>
+					<p><strong>Status:</strong> 
+						<span class="status-box">Available</span>
+					</p>
+				
+
+				@guest
+				<div class="hover-message">Login to see more details</div>
+				@endguest
+				</a>
+			</div>
+			@endforeach
 		</div>
-		@endforeach
 	</div>
 
-	    </div>
 	<script src="{{ asset('js/index.js') }}"></script>
 </body>
 </html>

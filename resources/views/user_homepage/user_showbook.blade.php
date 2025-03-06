@@ -11,6 +11,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
+                    
                     <p><strong>User ID:</strong> {{ $book->user_id }}</p>
                     <p><strong>Book name:</strong> {{ $book->name }}</p>
                     

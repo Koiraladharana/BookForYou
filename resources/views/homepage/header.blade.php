@@ -15,8 +15,22 @@
 				<li><a href="/donation">Donation</a></li>
 				<li><a href="/selling">Selling</a></li>
                 <li><a href="/exchange">Exchange</a></li>
-				<button><a href="/login">login</a></button>
-				<button><a href="/register">Register</a></button>
+				
+				@auth
+    <li class="dropdown">
+        <a href="/user" class="dropbtn">👤{{ Auth::user()->name }}</a>
+        <div class="dropdown-content">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </li>
+@else
+    <button><a href="{{ route('login') }}">Login</a></button>
+    <button><a href="{{ route('reguser') }}">Register</a></button>
+@endauth
+
 			</ul>
 		</div>
 	</nav>
@@ -40,20 +54,34 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="book-container">
 			@foreach($books as $book)
-			<div class="book-card">
-				<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
-				<p><strong>Book name:</strong> {{ $book->name }}</p>
-				<p><strong>Author:</strong> {{ $book->author ?? 'Unknown' }}</p>
-				<p><strong>Category:</strong> {{ $book->category }}</p>
-				<p><strong>Location:</strong> {{ $book->location }}</p>
-				<p><strong>Price:</strong> ${{ $book->price }}</p>
-				<p><strong>Status:</strong> {{ $book->status }}</p>
-			</div>
-			@endforeach
+		<div class="book-card">
+			<a href="{{ Auth::check() ? route('usersee', $book->id) : route('login', ['redirect' => route('usersee', $book->id)]) }}">
+			<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
+			<p><strong>User ID:</strong> {{ $book->user_id }}</p>
+			<h3>{{ $book->book_name }}</h3>
+			<p><strong>Book name:</strong> {{ $book->name }}</p>
+			@if(strtolower($book->category) === 'exchange')
+            <p><strong>Book I Want:</strong> {{ $book->want_book ?? 'Not specified' }}</p>
+			
+                 @endif
+			<!-- Always Green "Available" Status -->
+			<p><strong>Status:</strong> 
+				<span class="status-box">Available</span>
+			</p>
+			
+			@guest
+			<div class="hover-message">Login to see more details</div>
+			    @endguest
+			</a>
 		</div>
-		
+		@endforeach
+		</div>
+
 	</div>
+		
+		
 	
 	

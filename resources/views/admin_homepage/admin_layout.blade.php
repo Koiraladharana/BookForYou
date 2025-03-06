@@ -56,7 +56,7 @@
             height: 100vh;
             position: fixed;
             color: white;
-            padding: 20px 15px;
+            padding: 20px 1px;
             box-sizing: border-box;
         }
 
@@ -98,6 +98,158 @@
             margin-left: 270px;
             padding: 75px;
         }
+
+        /* Book Cards Layout */
+.book-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the cards */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Book Card */
+.book-card {
+    width: 250px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-card:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Book Image */
+.book-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Book Text */
+.book-card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #32353c;
+}
+
+.book-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .book-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* index.css */
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.stat-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 20%;
+    background-color: snow !important;
+    border-radius: 8px;
+}
+
+.stat-box h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.stat-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007BFF;
+}
+/* Add to your CSS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #88d113 !important;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: darkred;
+}
+.status-box.available {
+    background-color: #4CAF50; /* Green color */
+}
+
+.status-box.not-available {
+    background-color: #f44336; /* Red color */
+}
+
+/* Table Cell Styling */
+table td {
+    text-align: center; /* Center the content in table cells */
+    vertical-align: middle; /* Align content vertically in the middle */
+}
+.status-box {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 14px; /* Adjust font size as needed */
+    text-align: center; /* Center the text */
+}
+th {
+    text-align: center; 
+}
+/* Profile Image */
+img {
+            width: 150px;
+            height: 100px;
+            border-radius: 0%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
+
     </style>
 </head>
 
@@ -105,11 +257,9 @@
 
     <!-- Top Navigation -->
     <div class="navbar">
-        <h2><a href="{{ route('userdas') }}">User Dashboard</a></h2>
+        <h2><a href="/admin">Admin Panel</a></h2>
         <div>
-            <a href="{{ route('userdonate') }}">Donation</a>
-            <a href="{{ route('usersell') }}">Selling</a>
-            <a href="{{ route('userswap') }}">Exchange</a>
+            <a href="{{ route('home') }}">Home</a>
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
                 <button type="submit" class="logout-btn">Logout</button>
@@ -123,17 +273,17 @@
             <h3>👤</h3>
             <span>{{ Auth::user()->name }}</span>
         </div>
-        <a href="{{ route('books.view') }}">📖 View My Books</a>
-        <a href="{{ route('books.create') }}">➕ Add New Book</a>
+        <a href="{{ route('admindas') }}">🏠Home</a>
+         <a href="{{ route('showBooks') }}">📚Show Books</a>
+        <a href="{{ route('showUsers') }}">👤Show Users</a>
+        <a href="{{ route('showFraudReports') }}">⚠️ Show User Reports</a>
+
         
-        <a href="{{ route('books.showedit') }}">📖 Edit Book</a>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <h2>Welcome to Your User Panel</h2>
-        <p>Manage your books and browse books from other users.</p>
-        <h3> <span>{{ Auth::user()->name }}</span> Welcome</h3>
+        @yield('content')
     </div>
 
     <!-- Bootstrap JS -->

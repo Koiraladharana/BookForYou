@@ -103,6 +103,7 @@
         <!-- Login Form -->
         <form action="{{ route('login') }}" method="POST">
             @csrf
+            <input type="hidden" name="redirect" value="{{ request('redirect') }}">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" class="form-control @error('email') is-invalid @enderror">

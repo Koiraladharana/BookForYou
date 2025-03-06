@@ -11,7 +11,7 @@ class Book extends Model
 
     protected $fillable = [
         'name', 'author', 'category', 'photo', 'location', 'price', 
-        'email', 'phone', 'have_book', 'want_book', 'status', 'user_id'
+        'email', 'phone', 'have_book', 'want_book', 'status', 'user_id', 'isbn', 'publication'
     ];
 
     // Relationship: A book belongs to a user
