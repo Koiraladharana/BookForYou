@@ -14,8 +14,12 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            display: flex; /* Enable flexbox for the body */
+            flex-direction: column; /* Arrange body content in a column */
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
         }
-
+    
         /* Navbar */
         .navbar {
             position: fixed;
@@ -28,18 +32,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-sizing: border-box; /* Include padding in width */
         }
-
+    
         .navbar a {
             color: white;
             text-decoration: none;
             padding: 10px 15px;
         }
-
+    
         .navbar a:hover {
             background-color: #575757;
         }
-
+    
         .logout-btn {
             background-color: red;
             border: none;
@@ -47,7 +52,7 @@
             padding: 8px 15px;
             cursor: pointer;
         }
-
+    
         /* Sidebar */
         .sidebar {
             width: 250px;
@@ -59,7 +64,7 @@
             padding: 20px 1px;
             box-sizing: border-box;
         }
-
+    
         .sidebar a {
             display: block;
             padding: 12px 20px;
@@ -69,186 +74,188 @@
             font-size: 16px;
             border-radius: 4px;
         }
-
+    
         .sidebar a:hover {
             background-color: #2980b9;
         }
-
+    
         .sidebar .user-info {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 30px;
         }
-
+    
         .sidebar .user-info img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             margin-bottom: 10px;
         }
-
+    
         .sidebar .user-info span {
             font-weight: bold;
             font-size: 18px;
         }
-
+    
         /* Main Content */
         .main-content {
             margin-left: 270px;
             padding: 75px;
+            flex-grow: 1; /* Allow main content to grow and push footer down */
         }
-
+    
         /* Book Cards Layout */
-.book-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the cards */
-    gap: 20px;
-    padding: 20px;
-}
-
-/* Individual Book Card */
-.book-card {
-    width: 250px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-}
-
-.book-card:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-/* Book Image */
-.book-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-/* Book Text */
-.book-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #32353c;
-}
-
-.book-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 5px 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .book-container {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-/* index.css */
-.container {
-    padding: 20px;
-    text-align: center;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.stat-box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 20%;
-    background-color: snow !important;
-    border-radius: 8px;
-}
-
-.stat-box h3 {
-    font-size: 18px;
-    color: #333;
-}
-
-.stat-box p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #007BFF;
-}
-/* Add to your CSS */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #88d113 !important;
-}
-
-.btn-danger {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.btn-danger:hover {
-    background-color: darkred;
-}
-.status-box.available {
-    background-color: #4CAF50; /* Green color */
-}
-
-.status-box.not-available {
-    background-color: #f44336; /* Red color */
-}
-
-/* Table Cell Styling */
-table td {
-    text-align: center; /* Center the content in table cells */
-    vertical-align: middle; /* Align content vertically in the middle */
-}
-.status-box {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
-    color: white;
-    font-size: 14px; /* Adjust font size as needed */
-    text-align: center; /* Center the text */
-}
-th {
-    text-align: center; 
-}
-/* Profile Image */
-img {
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the cards */
+            gap: 20px;
+            padding: 20px;
+        }
+    
+        /* Individual Book Card */
+        .book-card {
+            width: 250px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+    
+        .book-card:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+    
+        /* Book Image */
+        .book-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+    
+        /* Book Text */
+        .book-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #32353c;
+        }
+    
+        .book-card p {
+            font-size: 14px;
+            color: #555;
+            margin: 5px 0;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .book-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        /* index.css - Assuming you might still have some of these styles */
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+    
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+    
+        .stat-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 20%;
+            background-color: snow !important;
+            border-radius: 8px;
+        }
+    
+        .stat-box h3 {
+            font-size: 18px;
+            color: #333;
+        }
+    
+        .stat-box p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007BFF;
+        }
+        /* Add to your CSS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+    
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    
+        th {
+            background-color: #88d113 !important;
+        }
+    
+        .btn-danger {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    
+        .btn-danger:hover {
+            background-color: darkred;
+        }
+        .status-box.available {
+            background-color: #4CAF50; /* Green color */
+        }
+    
+        .status-box.not-available {
+            background-color: #f44336; /* Red color */
+        }
+    
+        /* Table Cell Styling */
+        table td {
+            text-align: center; /* Center the content in table cells */
+            vertical-align: middle; /* Align content vertically in the middle */
+        }
+        .status-box {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+            font-size: 14px; /* Adjust font size as needed */
+            text-align: center; /* Center the text */
+        }
+        th {
+            text-align: center;
+        }
+        /* Profile Image */
+        img {
             width: 150px;
             height: 100px;
             border-radius: 0%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
-
+    
         img:hover {
             transform: scale(1.1);
         }
 
+    
 
     </style>
 </head>
@@ -285,11 +292,10 @@ img {
     <div class="main-content">
         <?php echo $__env->yieldContent('content'); ?>
     </div>
-
+   
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>
 <?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/admin_homepage/admin_layout.blade.php ENDPATH**/ ?>

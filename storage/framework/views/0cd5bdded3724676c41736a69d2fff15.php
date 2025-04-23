@@ -65,7 +65,7 @@
 
         <div class="mb-3">
             <label for="phone" class="form-label">Phone Number (Optional)</label>
-            <input type="text" name="phone" class="form-control">
+            <input type="number" name="phone" class="form-control">
         </div>
 
         <!-- Exchange Book Fields (Only for Exchange Category) -->

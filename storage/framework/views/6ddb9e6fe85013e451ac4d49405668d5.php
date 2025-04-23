@@ -54,8 +54,8 @@
 		<div class="book-container">
 			<?php $__currentLoopData = $books; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<div class="book-card">
-				<img src="<?php echo e(asset('storage/' . $book->photo)); ?>" alt="Book Image">
 				<a href="<?php echo e(Auth::check() ? route('usersee', $book->id) : route('login', ['redirect' => route('usersee', $book->id)])); ?>">
+				<img src="<?php echo e(asset('storage/' . $book->photo)); ?>" alt="Book Image">
 					<p><strong>User ID:</strong> <?php echo e($book->user_id); ?></p>
 					<h3><?php echo e($book->book_name); ?></h3>
 					<p><strong>Book Name:</strong> <?php echo e($book->name); ?></p>
@@ -74,7 +74,5 @@
 		</div>
 	</div>
 
-	<script src="<?php echo e(asset('js/index.js')); ?>"></script>
-</body>
-</html>
+	<?php echo $__env->make('homepage.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/homepage/donation.blade.php ENDPATH**/ ?>

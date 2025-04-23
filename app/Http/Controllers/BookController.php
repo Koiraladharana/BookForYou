@@ -13,25 +13,25 @@ class BookController extends Controller
     // Show books before login
     public function index()
     {
-        $books = Book::where('status', 'Available')->get();
+        $books = Book::where('status', 'Available')->latest()->get();
         return view('welcome', compact('books'));
     }
 
     public function showDonations()
     {
-        $books = Book::where('category', 'donation')->where('status', 'Available')->get();
+        $books = Book::where('category', 'donation')->where('status', 'Available')->latest()->get();
         return view('homepage.donation', compact('books'));
     }
 
     public function showSelling()
     {
-        $books = Book::where('category', 'selling')->where('status', 'Available')->get();
+        $books = Book::where('category', 'selling')->where('status', 'Available')->latest()->get();
         return view('homepage.selling', compact('books'));
     }
 
     public function showExchange()
     {
-        $books = Book::where('category', 'exchange')->where('status', 'Available')->get();
+        $books = Book::where('category', 'exchange')->where('status', 'Available')->latest()->get();
         return view('homepage.exchange', compact('books'));
     }
 
@@ -44,7 +44,7 @@ class BookController extends Controller
     public function viewbooks(Book $books)
     {
         // Get books added by the logged-in user
-        $books = Book::where('user_id', Auth::id())->get();
+        $books = Book::where('user_id', Auth::id())->latest()->get();
         return view('user_homepage.view_books', compact('books'));
     }
 
@@ -56,7 +56,6 @@ class BookController extends Controller
     public function show(Book $book)
 {
     $this->authorize('show', $book);
-    
     return view('user_homepage.show_books', compact('book'));
 }
 
@@ -121,7 +120,7 @@ class BookController extends Controller
     public function editbooks(Book $books)
     {
         // Get books added by the logged-in user
-        $books = Book::where('user_id', Auth::id())->get();
+        $books = Book::where('user_id', Auth::id())->latest()->get();
         return view('user_homepage.show_books_edit', compact('books'));
     }
 

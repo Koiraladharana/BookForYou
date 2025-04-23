@@ -22,6 +22,5 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
-	<?php echo $__env->make('admin_homepage.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php echo $__env->make('admin_homepage.admin_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/admin_homepage/header.blade.php ENDPATH**/ ?>

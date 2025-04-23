@@ -34,4 +34,4 @@
     </table>
 @endsection
 
-@include('admin_homepage.footer')
+

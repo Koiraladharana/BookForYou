@@ -71,8 +71,5 @@
         </div>
     </div>
 
-    <script src="<?php echo e(asset('js/index.js')); ?>"></script>
-</body>
-
-</html>
+    <?php echo $__env->make('homepage.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/homepage/exchange.blade.php ENDPATH**/ ?>

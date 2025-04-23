@@ -22,4 +22,3 @@
         </div>
     </div>
 @endsection
-	@include('admin_homepage.footer')

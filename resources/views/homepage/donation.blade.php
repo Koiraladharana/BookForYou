@@ -54,8 +54,8 @@
 		<div class="book-container">
 			@foreach($books as $book)
 			<div class="book-card">
-				<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
 				<a href="{{ Auth::check() ? route('usersee', $book->id) : route('login', ['redirect' => route('usersee', $book->id)]) }}">
+				<img src="{{ asset('storage/' . $book->photo) }}" alt="Book Image">
 					<p><strong>User ID:</strong> {{ $book->user_id }}</p>
 					<h3>{{ $book->book_name }}</h3>
 					<p><strong>Book Name:</strong> {{ $book->name }}</p>
@@ -74,6 +74,4 @@
 		</div>
 	</div>
 
-	<script src="{{ asset('js/index.js') }}"></script>
-</body>
-</html>
+	@include('homepage.footer')

@@ -24,7 +24,7 @@ class AdminController extends Controller
     public function showBooks()
 {
     // Fetch all books
-    $books = Book::all();
+    $books = Book::latest()->get();
     return view('admin_homepage.show_book', compact('books'));
 }
 
