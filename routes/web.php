@@ -49,6 +49,11 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+//Search Route
+Route::get('/search/autocomplete', [BookController::class, 'autocomplete'])->name('search.autocomplete');
+Route::get('/search', [BookController::class, 'search'])->name('search.results');
+
+
 //Admin panel
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admindas');

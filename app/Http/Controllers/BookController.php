@@ -185,4 +185,41 @@ class BookController extends Controller
 
         return redirect()->route('books.showedit')->with('success', 'Book status updated!');
     }
+
+    public function autocomplete(Request $request)
+    {
+        $query = $request->get('query');
+        $books = Book::where('name', 'like', '%' . $query . '%')
+                     ->orWhere('author', 'like', '%' . $query . '%')
+                     ->orWhere('isbn', 'like', '%' . $query . '%')
+                     ->where('status', 'Available') // Only search available books
+                     ->limit(10) // Limit the number of suggestions
+                     ->get();
+
+        $results = [];
+        foreach ($books as $book) {
+            $results[] = [
+                'value' => $book->name, // Display title in the suggestion list (you used 'name' here)
+                'data' => $book->id,    // Optionally pass the book ID
+            ];
+        }
+
+        return response()->json($results);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('query');
+
+        $books = Book::where('name', 'like', '%' . $query . '%')
+                     ->orWhere('author', 'like', '%' . $query . '%')
+                     ->orWhere('isbn', 'like', '%' . $query . '%')
+                     ->where('status', 'Available') // Only search available books
+                     ->paginate(15); // Paginate the search results
+
+        return view('search.results', compact('books', 'query'));
+    }
 }
+
+
+

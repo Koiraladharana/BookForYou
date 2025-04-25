@@ -36,3 +36,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+//for search
+$(document).ready(function() {
+    $("#search").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "{{ route('search.autocomplete') }}",
+                type: 'GET',
+                dataType: "json",
+                data: {
+                    query: request.term
+                },
+                success: function(data) {
+                    response($.map(data, function(item) {
+                        return {
+                            label: item.value,
+                            value: item.value,
+                            data: item.data
+                        };
+                    }));
+                }
+            });
+        },
+        minLength: 1,
+        select: function(event, ui) {
+            // Optionally, you can do something when a suggestion is selected
+            // For example, directly submit the form with the selected value
+            $("#search").val(ui.item.value);
+            $("form.search-form").submit();
+        }
+    });
+});

@@ -11,6 +11,12 @@
 	<nav class="navbar">
 		<div class="navdiv">
 			<div class="logo"><a href="/">BookForYou</a> </div>
+
+			<form action="{{ route('search.results') }}" method="GET" class="search-form">
+                <input type="text" id="search" name="query" placeholder="Search books...">
+                <button type="submit">Search</button>
+            </form>
+			
 			<ul>
 				<li><a href="/donation">Donation</a></li>
 				<li><a href="/selling">Selling</a></li>
