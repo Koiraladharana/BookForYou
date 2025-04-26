@@ -182,6 +182,8 @@
         <a href="{{ route('books.create') }}">➕ Add New Book</a>
         <a href="{{ route('books.showedit') }}">📖 Edit Book</a>
         <a href="{{ url('/report-fraud') }}">🚨 Report Fraud</a>
+        <a href="{{ route('messages.create') }}">✉️ Send Message </a>
+        <a href="{{ route('messages.index') }}">✉️ Received Message</a> {{-- Updated Message Link --}}
 
         
     </div>

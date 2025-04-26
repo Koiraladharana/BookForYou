@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FraudReportController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,3 +95,10 @@ Route::put('/user/books/{book}', [BookController::class, 'update'])->middleware(
 Route::delete('/user/books/{book}/destroy', [BookController::class, 'destroy'])->middleware('auth')->name('books.destroy');
 //change book status
 Route::post('/user/books/{book}/toggle-status', [BookController::class, 'toggleStatus'])->middleware('auth')->name('books.toggleStatus');
+
+//Message Route
+Route::get('/messages/create/{recipient_id?}', [MessageController::class, 'create'])->name('messages.create');
+Route::post('/messages/send', [MessageController::class, 'send'])->name('messages.send');
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+Route::get('/messages/sent', [MessageController::class, 'sent'])->name('messages.sent');
+Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');

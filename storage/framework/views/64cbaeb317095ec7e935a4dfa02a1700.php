@@ -182,6 +182,8 @@
         <a href="<?php echo e(route('books.create')); ?>">➕ Add New Book</a>
         <a href="<?php echo e(route('books.showedit')); ?>">📖 Edit Book</a>
         <a href="<?php echo e(url('/report-fraud')); ?>">🚨 Report Fraud</a>
+        <a href="<?php echo e(route('messages.create')); ?>">✉️ Send Message </a>
+        <a href="<?php echo e(route('messages.index')); ?>">✉️ Received Message</a> 
 
         
     </div>
