@@ -51,6 +51,7 @@ unset($__errorArgs, $__bag); ?>
                     <div class="mt-3">
                         <a href="<?php echo e(route('messages.index')); ?>" class="btn btn-secondary"><?php echo e(__('Back to Received Messages')); ?></a>
                         <a href="<?php echo e(route('messages.sent')); ?>" class="btn btn-outline-secondary"><?php echo e(__('Back to Sent Messages')); ?></a>
+                        <a href="<?php echo e(route('messages.create', ['recipientId' => $message->sender_id])); ?>" class="btn btn-primary ms-2"><?php echo e(__('Reply in New Page')); ?></a>
                     </div>
                 </div>
             </div>

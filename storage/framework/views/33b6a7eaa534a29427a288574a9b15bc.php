@@ -22,6 +22,7 @@
                 <li class="dropdown">
                     <a href="/user" class="dropbtn">👤<?php echo e(Auth::user()->name); ?></a>
                     <div class="dropdown-content">
+                        <a href="/user">Dashboard</a>
                         <form action="<?php echo e(route('logout')); ?>" method="POST">
                             <?php echo csrf_field(); ?>
                             <button type="submit" class="logout-btn">Logout</button>

@@ -11,36 +11,27 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // Get the total count of books, users, and admins
         $totalBooks = Book::count();
-        $totalUsers = User::where('role', 'user')->count(); // assuming 'user' role
-        $totalAdmins = User::where('role', 'admin')->count(); // assuming 'admin' role
+        $totalUsers = User::where('role', 'user')->count();
+        $totalAdmins = User::where('role', 'admin')->count();
+
+        
         $totalFrauds = FraudReport::count();
 
         // Pass data to the view
         return view('admin_homepage.header', compact('totalBooks', 'totalUsers', 'totalAdmins','totalFrauds'));
     }
 
-    public function showBooks()
-{
-    // Fetch all books
-    $books = Book::latest()->get();
-    return view('admin_homepage.show_book', compact('books'));
-}
-
-
-public function showUsers()
-{
-    // Fetch all users with book count
-    $users = User::withCount('books')->get();
-
-    return view('admin_homepage.show_user', compact('users'));
-}
-
+    public function showUsers()
+    {
+        // Fetch all users with book count
+        $users = User::withCount('books')->get();
+        return view('admin_homepage.show_user', compact('users'));
+    }
 
     public function showFraudReports()
     {
-        $fraudReports = FraudReport::all();  // Fetch all fraud reports
+        $fraudReports = FraudReport::all();   // Fetch all fraud reports
         return view('admin_homepage.show_fraud_reports', compact('fraudReports'));
     }
 
@@ -65,4 +56,24 @@ public function showUsers()
         return redirect()->route('showFraudReports')->with('success', 'Fraud report deleted successfully');
     }
 
+    public function showBooks(Request $request)
+    {
+        $filter = strtolower($request->input('filter', 'all')); // Convert filter to lowercase
+
+        $books = Book::query();
+
+        if ($filter !== 'all') {
+            $books->whereRaw('LOWER(category) = ?', [$filter]); // Compare lowercase values
+        }
+
+        $books = $books->latest()->paginate(10); // You might want to adjust the pagination number
+
+        // Calculate book counts
+        $bookCounts['all'] = Book::count();
+        $bookCounts['donation'] = Book::where('category', 'donation')->count();
+        $bookCounts['selling'] = Book::where('category', 'selling')->count();
+        $bookCounts['exchange'] = Book::where('category', 'exchange')->count();
+
+        return view('admin_homepage.show_book', compact('books', 'bookCounts'));
+    }
 }

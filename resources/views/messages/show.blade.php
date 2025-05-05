@@ -37,6 +37,7 @@
                     <div class="mt-3">
                         <a href="{{ route('messages.index') }}" class="btn btn-secondary">{{ __('Back to Received Messages') }}</a>
                         <a href="{{ route('messages.sent') }}" class="btn btn-outline-secondary">{{ __('Back to Sent Messages') }}</a>
+                        <a href="{{ route('messages.create', ['recipientId' => $message->sender_id]) }}" class="btn btn-primary ms-2">{{ __('Reply in New Page') }}</a>
                     </div>
                 </div>
             </div>

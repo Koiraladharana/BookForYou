@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Panel</title>
-    
-    <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
@@ -68,6 +67,7 @@
             margin-bottom: 10px;
             font-size: 16px;
             border-radius: 4px;
+            position: relative; /* To position the notification badge */
         }
 
         .sidebar a:hover {
@@ -81,10 +81,8 @@
             margin-bottom: 30px;
         }
 
-        .sidebar .user-info img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .sidebar .user-info h3 {
+            font-size: 2em; /* Larger user icon */
             margin-bottom: 10px;
         }
 
@@ -96,68 +94,57 @@
         /* Main Content */
         .main-content {
             margin-left: 270px;
-            padding: 75px;
+            padding: 75px 20px; /* Added some horizontal padding */
+            box-sizing: border-box; /* Ensure padding doesn't add to width */
         }
 
-        /* Book Cards Layout */
-.book-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Center the cards */
-    gap: 20px;
-    padding: 20px;
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .book-container {
+                flex-direction: column;
+                align-items: center;
+            }
 
-/* Individual Book Card */
-.book-card {
-    width: 250px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-}
+            .main-content {
+                margin-left: 0;
+                padding-top: 110px; /* Adjust padding for fixed navbar */
+            }
 
-.book-card:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-}
+            .sidebar {
+                width: 100%;
+                position: static;
+                height: auto;
+                padding: 15px;
+                text-align: center;
+            }
 
-/* Book Image */
-.book-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 5px;
-}
+            .sidebar .user-info {
+                margin-bottom: 15px;
+            }
 
-/* Book Text */
-.book-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #32353c;
-}
+            .sidebar a {
+                display: inline-block;
+                margin: 5px 10px;
+                padding: 10px 15px;
+            }
+        }
 
-.book-card p {
-    font-size: 14px;
-    color: #555;
-    margin: 5px 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .book-container {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
+        /* Notification Badge */
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: #f39c12; /* Example color */
+            color: white;
+            border-radius: 50%;
+            padding: 5px 8px;
+            font-size: 12px;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Top Navigation -->
     <div class="navbar">
         <h2><a href="/">User Dashboard</a></h2>
         <div>
@@ -171,32 +158,31 @@
         </div>
     </div>
 
-    <!-- Sidebar -->
     <div class="sidebar">
         <div class="user-info">
             <h3>👤</h3>
             <span><?php echo e(Auth::user()->name); ?></span>
         </div>
-        
-         <a href="<?php echo e(route('userdas')); ?>">📖 View Book</a>
+
+        <a href="<?php echo e(route('userdas')); ?>">📖 View Book</a>
         <a href="<?php echo e(route('books.create')); ?>">➕ Add New Book</a>
         <a href="<?php echo e(route('books.showedit')); ?>">📖 Edit Book</a>
         <a href="<?php echo e(url('/report-fraud')); ?>">🚨 Report Fraud</a>
         <a href="<?php echo e(route('messages.create')); ?>">✉️ Send Message </a>
-        <a href="<?php echo e(route('messages.index')); ?>">✉️ Received Message</a> 
-
+        <a href="<?php echo e(route('messages.index')); ?>">✉️ Received Message
+            <?php if(auth()->user()->unreadMessages()->count() > 0): ?>
+                <span class="notification-badge"><?php echo e(auth()->user()->unreadMessages()->count()); ?></span>
+            <?php endif; ?>
+        </a>
         
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <?php echo $__env->yieldContent('content'); ?>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
-</html>
-<?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+</html><?php /**PATH C:\xampp\htdocs\BookForYou\resources\views/layouts/app.blade.php ENDPATH**/ ?>

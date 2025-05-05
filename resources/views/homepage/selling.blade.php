@@ -19,6 +19,7 @@
                 <li class="dropdown">
                     <a href="/user" class="dropbtn">👤{{ Auth::user()->name }}</a>
                     <div class="dropdown-content">
+                        <a href="/user">Dashboard</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="logout-btn">Logout</button>

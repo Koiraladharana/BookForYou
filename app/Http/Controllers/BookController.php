@@ -70,7 +70,7 @@ class BookController extends Controller
             'location' => 'required',
             'price' => 'nullable|numeric',
             'want_book' => 'nullable|string',
-            'email' => 'required|email',
+            'email' => 'nullable|email',
             'phone' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg',
             'isbn' => 'required',
@@ -136,7 +136,7 @@ class BookController extends Controller
         'location' => 'required',
         'price' => 'nullable|numeric',
         'phone' => 'nullable|digits:10',
-        'email' => 'required|email',
+        'email' => 'nullable|email',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
     ]);
 

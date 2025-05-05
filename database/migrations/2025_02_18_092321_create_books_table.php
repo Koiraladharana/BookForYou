@@ -19,7 +19,7 @@ return new class extends Migration
            $table->string('photo')->nullable(); // Book image
            $table->string('location'); // City or address
            $table->decimal('price', 8, 2)->nullable(); // Price (only for selling)
-           $table->string('email'); // Contact email
+           $table->string('email')->nullable(); // Contact email
            $table->string('phone')->nullable(); // Optional phone number
            $table->string('have_book')->nullable(); // (For exchange)
            $table->string('want_book')->nullable(); // (For exchange)

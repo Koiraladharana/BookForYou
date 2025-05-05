@@ -28,15 +28,15 @@ Route::get('/exchange', [BookController::class, 'showExchange'])->name('books.ex
 
 //show login form
 Route::get('/login', function () {
-    return view('log_reg.login');
+ return view('log_reg.login');
 })->name('login');
 
 //take data to database
 Route::post('/login', [LoginController::class, 'login']);
 
-//show registration form 
+//show registration form
 Route::get('/register', function () {
-    return view('log_reg.register');
+ return view('log_reg.register');
 })->name('reguser');
 
 //take register data to database
@@ -44,10 +44,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 // Logout Route
 Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect('/');
+ Auth::logout();
+ request()->session()->invalidate();
+ request()->session()->regenerateToken();
+return redirect('/');
 })->name('logout');
 
 //Search Route
@@ -56,25 +56,25 @@ Route::get('/search', [BookController::class, 'search'])->name('search.results')
 
 
 //Admin panel
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admindas');
-    Route::get('/admin/books', [AdminController::class, 'showBooks'])->name('showBooks');
-    Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
-    Route::get('/admin/fraud-reports', [AdminController::class, 'showFraudReports'])->name('showFraudReports');
-    Route::delete('/admin/books/{id}', [AdminController::class, 'deleteBook'])->name('deleteBook');
-    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
-    Route::delete('/admin/fraud-reports/{id}', [AdminController::class, 'deleteFraudReport'])->name('deleteFraudReport');
+ Route::middleware(['auth', 'admin'])->group(function () {
+ Route::get('/admin', [AdminController::class, 'index'])->name('admindas');
+ Route::get('/admin/books', [AdminController::class, 'showBooks'])->name('showBooks');
+ Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('showUsers');
+ Route::get('/admin/fraud-reports', [AdminController::class, 'showFraudReports'])->name('showFraudReports');
+ Route::delete('/admin/books/{id}', [AdminController::class, 'deleteBook'])->name('deleteBook');
+ Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser'])->name('deleteUser');
+ Route::delete('/admin/fraud-reports/{id}', [AdminController::class, 'deleteFraudReport'])->name('deleteFraudReport');
 });
 
 
 //Displays all books added by the logged-in user.
 Route::middleware(['auth','user'])->group(function () {
-    Route::get('/user', [BookController::class, 'viewbooks'])->name('userdas');
+Route::get('/user', [BookController::class, 'viewbooks'])->name('userdas');
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/report-fraud', [FraudReportController::class, 'create']);
-    Route::post('/report-fraud', [FraudReportController::class, 'store']);
+Route::get('/report-fraud', [FraudReportController::class, 'create']);
+Route::post('/report-fraud', [FraudReportController::class, 'store']);
 });
 
 //Display full details of book with feedback option
@@ -85,7 +85,7 @@ Route::get('/user/books/{book}/showbook', [BookController::class, 'show'])->midd
 Route::get('/user/books/create', [BookController::class, 'create'])->middleware('auth')->name('books.create');
 //Saves the book in the database.
 Route::post('/user/books', [BookController::class, 'store'])->middleware('auth')->name('books.store');
-//show user books for edit 
+//show user books for edit
 Route::get('/user/books/show_edit', [BookController::class, 'editbooks'])->middleware('auth')->name('books.showedit');
 //show edit form for one particular selected book
 Route::get('/user/books/{book}/edit', [BookController::class, 'edit'])->middleware(['auth', 'can:edit,book'])->name('books.edit');
@@ -102,3 +102,7 @@ Route::post('/messages/send', [MessageController::class, 'send'])->name('message
 Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 Route::get('/messages/sent', [MessageController::class, 'sent'])->name('messages.sent');
 Route::get('/messages/{message}', [MessageController::class, 'show'])->name('messages.show');
+Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+
+Route::get('/messages/conversation/{senderId}', [MessageController::class, 'conversation'])->name('messages.conversation');
+Route::delete('/messages/conversation/{senderId}', [MessageController::class, 'destroyConversation'])->name('messages.destroy-conversation');
