@@ -38,6 +38,7 @@
                         <p class="card-text"><i class="fas fa-phone text-success me-2"></i> <strong>Phone:</strong> {{ $book->phone }}</p>
                     @endif
 
+                    <a href="{{ route('messages.create', ['recipientId' => $book->user_id, 'bookId' => $book->id]) }}" class="btn btn-primary rounded-pill me-2"><i class="fas fa-envelope me-2"></i> Send Message</a>
                     <a href="{{ route('userdas', $book->id) }}" class="btn btn-outline-primary rounded-pill"><i class="fas fa-arrow-left me-2"></i> Back to My Books</a>
                 </div>
             </div>

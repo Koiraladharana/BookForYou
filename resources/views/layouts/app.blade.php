@@ -161,7 +161,7 @@
     <div class="sidebar">
         <div class="user-info">
             <h3>👤</h3>
-            <span>{{ Auth::user()->name }}</span>
+            <span>{{ Auth::user()->name }} ({{ Auth::user()->id }})</span>
         </div>
 
         <a href="{{ route('userdas') }}">📖 View Book</a>

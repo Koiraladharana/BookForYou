@@ -106,3 +106,4 @@ Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->nam
 
 Route::get('/messages/conversation/{senderId}', [MessageController::class, 'conversation'])->name('messages.conversation');
 Route::delete('/messages/conversation/{senderId}', [MessageController::class, 'destroyConversation'])->name('messages.destroy-conversation');
+

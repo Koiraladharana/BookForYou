@@ -161,7 +161,7 @@
     <div class="sidebar">
         <div class="user-info">
             <h3>👤</h3>
-            <span><?php echo e(Auth::user()->name); ?></span>
+            <span><?php echo e(Auth::user()->name); ?> (<?php echo e(Auth::user()->id); ?>)</span>
         </div>
 
         <a href="<?php echo e(route('userdas')); ?>">📖 View Book</a>

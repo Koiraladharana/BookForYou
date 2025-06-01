@@ -192,6 +192,7 @@ class BookController extends Controller
         $books = Book::where('name', 'like', '%' . $query . '%')
                      ->orWhere('author', 'like', '%' . $query . '%')
                      ->orWhere('isbn', 'like', '%' . $query . '%')
+                     ->orWhere('location', 'like', '%' . $query . '%')
                      ->where('status', 'Available') // Only search available books
                      ->limit(10) // Limit the number of suggestions
                      ->get();
@@ -214,6 +215,7 @@ class BookController extends Controller
         $books = Book::where('name', 'like', '%' . $query . '%')
                      ->orWhere('author', 'like', '%' . $query . '%')
                      ->orWhere('isbn', 'like', '%' . $query . '%')
+                     ->orWhere('location', 'like', '%' . $query . '%')
                      ->where('status', 'Available') // Only search available books
                      ->paginate(15); // Paginate the search results
 

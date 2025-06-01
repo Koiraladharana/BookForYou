@@ -18,7 +18,7 @@
 
 				<?php if(auth()->guard()->check()): ?>
 				<li class="dropdown">
-					<a href="/user" class="dropbtn">👤<?php echo e(Auth::user()->name); ?></a>
+					<a href="/user" class="dropbtn">👤<?php echo e(Auth::user()->name); ?> (<?php echo e(Auth::user()->id); ?>)</a>
 					<div class="dropdown-content">
 						<a href="/user">Dashboard</a>
 						<form action="<?php echo e(route('logout')); ?>" method="POST">

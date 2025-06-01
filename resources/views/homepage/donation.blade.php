@@ -18,7 +18,7 @@
 
 				@auth
 				<li class="dropdown">
-					<a href="/user" class="dropbtn">👤{{ Auth::user()->name }}</a>
+					<a href="/user" class="dropbtn">👤{{ Auth::user()->name }} ({{ Auth::user()->id }})</a>
 					<div class="dropdown-content">
 						<a href="/user">Dashboard</a>
 						<form action="{{ route('logout') }}" method="POST">
